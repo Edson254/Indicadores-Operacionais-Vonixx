@@ -94,29 +94,85 @@ function valorFormatado(valor, indicador) {
   return indicador.tipoCalculo === "mediaTempoMinutos" ? formatarTempoHHMM(valor) : `${Number(valor || 0).toFixed(2)}${indicador.unidade}`;
 }
 
+function formatarDataISO(data) {
+  return data.toISOString().slice(0, 10);
+}
+
+function obterInicioSemana(dataBase) {
+  const data = new Date(`${dataBase}T00:00:00`);
+  const diaSemana = data.getDay();
+  const diferenca = diaSemana === 0 ? -6 : 1 - diaSemana;
+  data.setDate(data.getDate() + diferenca);
+  return data;
+}
+
+function obterFimSemana(dataBase) {
+  const inicio = obterInicioSemana(dataBase);
+  const fim = new Date(inicio);
+  fim.setDate(inicio.getDate() + 6);
+  return fim;
+}
+
+function registroDentroPeriodo(registro, inicio, fim) {
+  return registro.data >= inicio && registro.data <= fim;
+}
+
 export default function AppIndicadoresArea() {
   const [usuarioLogado, setUsuarioLogado] = useState(null);
   const [login, setLogin] = useState({ nome: "", senha: "" });
   const [erroLogin, setErroLogin] = useState("");
   const [aba, setAba] = useState("dashboard");
   const [dataFiltro, setDataFiltro] = useState("2026-05-13");
+  const [anoFiltro, setAnoFiltro] = useState(2026);
+  const [mesFiltro, setMesFiltro] = useState(5);
+  const [semanaFiltro, setSemanaFiltro] = useState("mes");
   const [setorFiltro, setSetorFiltro] = useState("Todos");
   const [registros, setRegistros] = useState(registrosIniciais);
   const [novo, setNovo] = useState({ data: "2026-05-13", indicadorId: 1, turno: "Turno 1", r1: "", r2: "", anexos: [] });
 
   const setoresDisponiveis = useMemo(() => ["Todos", ...Array.from(new Set(indicadoresBase.map((i) => i.setor)))], []);
 
+  const periodoSelecionado = useMemo(() => {
+    const nomesMeses = [
+      "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+      "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
+
+    const inicioMes = new Date(anoFiltro, mesFiltro - 1, 1);
+    const fimMes = new Date(anoFiltro, mesFiltro, 0);
+
+    if (semanaFiltro === "mes") {
+      return {
+        inicio: formatarDataISO(inicioMes),
+        fim: formatarDataISO(fimMes),
+        label: `${nomesMeses[mesFiltro - 1]} de ${anoFiltro}`,
+      };
+    }
+
+    const numeroSemana = Number(semanaFiltro);
+    const diaInicio = 1 + (numeroSemana - 1) * 7;
+    const diaFim = Math.min(diaInicio + 6, fimMes.getDate());
+    const inicioSemana = new Date(anoFiltro, mesFiltro - 1, diaInicio);
+    const fimSemana = new Date(anoFiltro, mesFiltro - 1, diaFim);
+
+    return {
+      inicio: formatarDataISO(inicioSemana),
+      fim: formatarDataISO(fimSemana),
+      label: `${numeroSemana}ª semana de ${nomesMeses[mesFiltro - 1]} de ${anoFiltro}`,
+    };
+  }, [anoFiltro, mesFiltro, semanaFiltro]);
+
   const resumoIndicadores = useMemo(() => {
     return indicadoresBase
       .filter((indicador) => setorFiltro === "Todos" || indicador.setor === setorFiltro)
       .map((indicador) => {
-        const regs = registros.filter((r) => r.indicadorId === indicador.id && r.data === dataFiltro);
+        const regs = registros.filter((r) => r.indicadorId === indicador.id && registroDentroPeriodo(r, periodoSelecionado.inicio, periodoSelecionado.fim));
         const resultado = calcularResultado(regs, indicador);
         const somaR1 = regs.reduce((acc, item) => acc + Number(item.r1 || 0), 0);
         const somaR2 = regs.reduce((acc, item) => acc + Number(item.r2 || 0), 0);
         return { ...indicador, resultado, status: statusIndicador(resultado, indicador), registros: regs, somaR1, somaR2 };
       });
-  }, [registros, dataFiltro, setorFiltro]);
+  }, [registros, periodoSelecionado, setorFiltro]);
 
   const verdes = resumoIndicadores.filter((i) => i.status.texto === "Dentro da Meta").length;
   const vermelhos = resumoIndicadores.filter((i) => i.status.texto === "Fora da Meta").length;
@@ -242,8 +298,40 @@ export default function AppIndicadoresArea() {
               <select value={setorFiltro} onChange={(e) => setSetorFiltro(e.target.value)} disabled={usuarioLogado.setor !== "Todos"} className="rounded-xl border bg-white px-4 py-2 disabled:bg-slate-100 disabled:text-slate-500">
                 {setoresDisponiveis.map((s) => <option key={s}>{s}</option>)}
               </select>
-              <span className="text-sm font-medium">Data:</span>
-              <input type="date" value={dataFiltro} onChange={(e) => setDataFiltro(e.target.value)} className="rounded-xl border bg-white px-4 py-2" />
+              <span className="text-sm font-medium">Ano:</span>
+              <select value={anoFiltro} onChange={(e) => setAnoFiltro(Number(e.target.value))} className="rounded-xl border bg-white px-4 py-2">
+                <option value={2026}>2026</option>
+                <option value={2027}>2027</option>
+                <option value={2028}>2028</option>
+              </select>
+
+              <span className="text-sm font-medium">Mês:</span>
+              <select value={mesFiltro} onChange={(e) => setMesFiltro(Number(e.target.value))} className="rounded-xl border bg-white px-4 py-2">
+                <option value={1}>Janeiro</option>
+                <option value={2}>Fevereiro</option>
+                <option value={3}>Março</option>
+                <option value={4}>Abril</option>
+                <option value={5}>Maio</option>
+                <option value={6}>Junho</option>
+                <option value={7}>Julho</option>
+                <option value={8}>Agosto</option>
+                <option value={9}>Setembro</option>
+                <option value={10}>Outubro</option>
+                <option value={11}>Novembro</option>
+                <option value={12}>Dezembro</option>
+              </select>
+
+              <span className="text-sm font-medium">Período:</span>
+              <select value={semanaFiltro} onChange={(e) => setSemanaFiltro(e.target.value)} className="rounded-xl border bg-white px-4 py-2">
+                <option value="mes">Mês completo</option>
+                <option value="1">1ª semana</option>
+                <option value="2">2ª semana</option>
+                <option value="3">3ª semana</option>
+                <option value="4">4ª semana</option>
+                <option value="5">5ª semana</option>
+              </select>
+
+              <Badge className="bg-slate-100 text-slate-700 border-slate-300">Consolidado: {periodoSelecionado.label}</Badge>
             </div>
 
             <div className="grid gap-4 md:grid-cols-5">
@@ -251,7 +339,7 @@ export default function AppIndicadoresArea() {
               <Card><p className="text-sm text-slate-500">Indicadores</p><h2 className="text-3xl font-bold">{resumoIndicadores.length}</h2></Card>
               <Card><p className="text-sm text-slate-500">Dentro da Meta</p><h2 className="text-3xl font-bold text-green-700">{verdes}</h2></Card>
               <Card><p className="text-sm text-slate-500">Fora da Meta</p><h2 className="text-3xl font-bold text-red-700">{vermelhos}</h2></Card>
-              <Card><p className="text-sm text-slate-500">Registros da Data</p><h2 className="text-3xl font-bold">{resumoIndicadores.reduce((acc, i) => acc + i.registros.length, 0)}</h2></Card>
+              <Card><p className="text-sm text-slate-500">Registros do Período</p><h2 className="text-3xl font-bold">{resumoIndicadores.reduce((acc, i) => acc + i.registros.length, 0)}</h2></Card>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
@@ -277,7 +365,7 @@ export default function AppIndicadoresArea() {
             <div className="space-y-4">
               <div>
                 <h3 className="text-xl font-bold">Curva de Resultado - Últimos 5 Dias</h3>
-                <p className="text-sm text-slate-500">Visualização individual por setor e indicador.</p>
+                <p className="text-sm text-slate-500">Visualização individual por setor e indicador, considerando o período consolidado selecionado.</p>
               </div>
               <div className="grid gap-6 lg:grid-cols-2">
                 {resumoIndicadores.map((indicador) => {
@@ -332,7 +420,6 @@ export default function AppIndicadoresArea() {
                 <input placeholder={indicadorEntrada?.r1Nome || "R1"} type="number" value={novo.r1} onChange={(e) => setNovo({ ...novo, r1: e.target.value })} className="rounded-xl border px-3 py-2" />
                 {indicadorEntrada?.tipoCalculo !== "percentualDireto" && <input placeholder={indicadorEntrada?.r2Nome || "R2"} type="number" value={novo.r2} onChange={(e) => setNovo({ ...novo, r2: e.target.value })} className="rounded-xl border px-3 py-2" />}
               </div>
-
               <div className="mt-4 rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-4">
                 <label className="text-sm font-bold text-slate-700">Anexar fotos ou documentos</label>
                 <input
@@ -407,7 +494,7 @@ export default function AppIndicadoresArea() {
 
         {aba === "tv" && (
           <section className="rounded-3xl bg-slate-900 p-8 text-white shadow-xl">
-            <p className="text-slate-400">Modo TV Operacional | {dataFiltro}</p>
+            <p className="text-slate-400">Modo TV Operacional | {periodoSelecionado.label}</p>
             <h2 className="text-4xl font-bold">Performance - {setorFiltro}</h2>
             <div className="mt-8 grid gap-6 md:grid-cols-3">
               <div className="rounded-3xl bg-white/10 p-6"><p className="text-slate-300">Indicadores</p><h3 className="mt-2 text-5xl font-bold">{resumoIndicadores.length}</h3></div>
