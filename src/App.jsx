@@ -32,26 +32,55 @@ const indicadoresBase = [
 ];
 
 const registrosIniciais = [
-  { id: 1, data: "2026-05-13", indicadorId: 1, turno: "Turno 1", r1: 1250, r2: 48000 },
-  { id: 2, data: "2026-05-13", indicadorId: 1, turno: "Turno 2", r1: 980, r2: 47000 },
-  { id: 3, data: "2026-05-13", indicadorId: 2, turno: "Turno 1", r1: 5020, r2: 5000 },
-  { id: 4, data: "2026-05-13", indicadorId: 2, turno: "Turno 2", r1: 2990, r2: 3000 },
-  { id: 5, data: "2026-05-13", indicadorId: 3, turno: "Turno 1", r1: 340, r2: 62000 },
-  { id: 6, data: "2026-05-13", indicadorId: 3, turno: "Turno 2", r1: 410, r2: 61500 },
-  { id: 7, data: "2026-05-13", indicadorId: 4, turno: "Turno 1", r1: 2, r2: 160 },
-  { id: 8, data: "2026-05-13", indicadorId: 4, turno: "Turno 2", r1: 4, r2: 170 },
-  { id: 9, data: "2026-05-13", indicadorId: 5, turno: "Turno 1", r1: 156, r2: 158 },
-  { id: 10, data: "2026-05-13", indicadorId: 5, turno: "Turno 2", r1: 147, r2: 150 },
-  { id: 11, data: "2026-05-13", indicadorId: 6, turno: "Turno 1", r1: 1.4, r2: 0 },
-  { id: 12, data: "2026-05-13", indicadorId: 6, turno: "Turno 2", r1: 1.8, r2: 0 },
-  { id: 13, data: "2026-05-13", indicadorId: 7, turno: "Turno 1", r1: 180, r2: 42000 },
-  { id: 14, data: "2026-05-13", indicadorId: 7, turno: "Turno 2", r1: 260, r2: 51500 },
-  { id: 15, data: "2026-05-13", indicadorId: 8, turno: "Turno 1", r1: 240, r2: 4 },
-  { id: 16, data: "2026-05-13", indicadorId: 8, turno: "Turno 2", r1: 300, r2: 5 },
-  { id: 17, data: "2026-05-13", indicadorId: 9, turno: "Turno 1", r1: 97, r2: 99 },
-  { id: 18, data: "2026-05-13", indicadorId: 9, turno: "Turno 2", r1: 111, r2: 112 },
-  { id: 19, data: "2026-05-13", indicadorId: 10, turno: "Turno 1", r1: 1.2, r2: 0 },
-  { id: 20, data: "2026-05-13", indicadorId: 10, turno: "Turno 2", r1: 1.6, r2: 0 },
+  // Base teste — 01/05/2026
+  { id: 1, data: "2026-05-01", indicadorId: 1, turno: "Turno 1", r1: 700, r2: 30000 },
+  { id: 2, data: "2026-05-01", indicadorId: 1, turno: "Turno 2", r1: 650, r2: 28000 },
+  { id: 3, data: "2026-05-01", indicadorId: 2, turno: "Turno 1", r1: 2500, r2: 2480 },
+  { id: 4, data: "2026-05-01", indicadorId: 2, turno: "Turno 2", r1: 2600, r2: 2550 },
+
+  // Base teste — 06/05/2026
+  { id: 5, data: "2026-05-06", indicadorId: 1, turno: "Turno 1", r1: 900, r2: 34000 },
+  { id: 6, data: "2026-05-06", indicadorId: 1, turno: "Turno 2", r1: 780, r2: 32000 },
+  { id: 7, data: "2026-05-06", indicadorId: 2, turno: "Turno 1", r1: 3100, r2: 3000 },
+  { id: 8, data: "2026-05-06", indicadorId: 2, turno: "Turno 2", r1: 3050, r2: 3000 },
+
+  // Base teste — 13/05/2026
+  { id: 9, data: "2026-05-13", indicadorId: 1, turno: "Turno 1", r1: 1250, r2: 48000 },
+  { id: 10, data: "2026-05-13", indicadorId: 1, turno: "Turno 2", r1: 980, r2: 47000 },
+  { id: 11, data: "2026-05-13", indicadorId: 2, turno: "Turno 1", r1: 5020, r2: 5000 },
+  { id: 12, data: "2026-05-13", indicadorId: 2, turno: "Turno 2", r1: 2990, r2: 3000 },
+
+  // Base teste — Operações Secos
+  { id: 13, data: "2026-05-01", indicadorId: 3, turno: "Turno 1", r1: 240, r2: 30000 },
+  { id: 14, data: "2026-05-01", indicadorId: 3, turno: "Turno 2", r1: 260, r2: 32000 },
+  { id: 15, data: "2026-05-06", indicadorId: 3, turno: "Turno 1", r1: 340, r2: 62000 },
+  { id: 16, data: "2026-05-06", indicadorId: 3, turno: "Turno 2", r1: 410, r2: 61500 },
+  { id: 17, data: "2026-05-13", indicadorId: 4, turno: "Turno 1", r1: 2, r2: 160 },
+  { id: 18, data: "2026-05-13", indicadorId: 4, turno: "Turno 2", r1: 4, r2: 170 },
+
+  // Base teste — Estoque
+  { id: 19, data: "2026-05-01", indicadorId: 5, turno: "Turno 1", r1: 98, r2: 100 },
+  { id: 20, data: "2026-05-01", indicadorId: 5, turno: "Turno 2", r1: 99, r2: 100 },
+  { id: 21, data: "2026-05-06", indicadorId: 5, turno: "Turno 1", r1: 156, r2: 158 },
+  { id: 22, data: "2026-05-06", indicadorId: 5, turno: "Turno 2", r1: 147, r2: 150 },
+  { id: 23, data: "2026-05-13", indicadorId: 6, turno: "Turno 1", r1: 1.4, r2: 0 },
+  { id: 24, data: "2026-05-13", indicadorId: 6, turno: "Turno 2", r1: 1.8, r2: 0 },
+
+  // Base teste — Recebimento Geral
+  { id: 25, data: "2026-05-01", indicadorId: 7, turno: "Turno 1", r1: 120, r2: 25000 },
+  { id: 26, data: "2026-05-01", indicadorId: 7, turno: "Turno 2", r1: 180, r2: 30000 },
+  { id: 27, data: "2026-05-06", indicadorId: 8, turno: "Turno 1", r1: 240, r2: 4 },
+  { id: 28, data: "2026-05-06", indicadorId: 8, turno: "Turno 2", r1: 300, r2: 5 },
+  { id: 29, data: "2026-05-13", indicadorId: 7, turno: "Turno 1", r1: 180, r2: 42000 },
+  { id: 30, data: "2026-05-13", indicadorId: 7, turno: "Turno 2", r1: 260, r2: 51500 },
+
+  // Base teste — Almoxarifado U&C
+  { id: 31, data: "2026-05-01", indicadorId: 9, turno: "Turno 1", r1: 97, r2: 99 },
+  { id: 32, data: "2026-05-01", indicadorId: 9, turno: "Turno 2", r1: 111, r2: 112 },
+  { id: 33, data: "2026-05-06", indicadorId: 10, turno: "Turno 1", r1: 1.2, r2: 0 },
+  { id: 34, data: "2026-05-06", indicadorId: 10, turno: "Turno 2", r1: 1.6, r2: 0 },
+  { id: 35, data: "2026-05-13", indicadorId: 9, turno: "Turno 1", r1: 120, r2: 122 },
+  { id: 36, data: "2026-05-13", indicadorId: 9, turno: "Turno 2", r1: 118, r2: 120 },
 ];
 
 function calcularResultado(registros, indicador) {
@@ -125,7 +154,9 @@ export default function AppIndicadoresArea() {
   const [dataFiltro, setDataFiltro] = useState("2026-05-13");
   const [anoFiltro, setAnoFiltro] = useState(2026);
   const [mesFiltro, setMesFiltro] = useState(5);
-  const [semanaFiltro, setSemanaFiltro] = useState("mes");
+  const [tipoVisao, setTipoVisao] = useState("diario");
+  const [semanaFiltro, setSemanaFiltro] = useState("2");
+  const [diaCalendarioFiltro, setDiaCalendarioFiltro] = useState("2026-05-13");
   const [setorFiltro, setSetorFiltro] = useState("Todos");
   const [registros, setRegistros] = useState(registrosIniciais);
   const [novo, setNovo] = useState({ data: "2026-05-13", indicadorId: 1, turno: "Turno 1", r1: "", r2: "", anexos: [] });
@@ -138,14 +169,24 @@ export default function AppIndicadoresArea() {
       "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
     ];
 
+    if (tipoVisao === "diario") {
+      const dataSelecionada = new Date(`${diaCalendarioFiltro}T00:00:00`);
+      const diaFormatado = dataSelecionada.toLocaleDateString("pt-BR");
+      return {
+        inicio: diaCalendarioFiltro,
+        fim: diaCalendarioFiltro,
+        label: `Visão diária — ${diaFormatado}`,
+      };
+    }
+
     const inicioMes = new Date(anoFiltro, mesFiltro - 1, 1);
     const fimMes = new Date(anoFiltro, mesFiltro, 0);
 
-    if (semanaFiltro === "mes") {
+    if (tipoVisao === "mensal") {
       return {
         inicio: formatarDataISO(inicioMes),
         fim: formatarDataISO(fimMes),
-        label: `${nomesMeses[mesFiltro - 1]} de ${anoFiltro}`,
+        label: `Visão mensal — ${nomesMeses[mesFiltro - 1]} de ${anoFiltro}`,
       };
     }
 
@@ -158,9 +199,9 @@ export default function AppIndicadoresArea() {
     return {
       inicio: formatarDataISO(inicioSemana),
       fim: formatarDataISO(fimSemana),
-      label: `${numeroSemana}ª semana de ${nomesMeses[mesFiltro - 1]} de ${anoFiltro}`,
+      label: `Visão semanal — ${numeroSemana}ª semana de ${nomesMeses[mesFiltro - 1]} de ${anoFiltro}`,
     };
-  }, [anoFiltro, mesFiltro, semanaFiltro]);
+  }, [tipoVisao, anoFiltro, mesFiltro, semanaFiltro, diaCalendarioFiltro]);
 
   const resumoIndicadores = useMemo(() => {
     return indicadoresBase
@@ -178,7 +219,7 @@ export default function AppIndicadoresArea() {
   const vermelhos = resumoIndicadores.filter((i) => i.status.texto === "Fora da Meta").length;
 
   function gerarCurvaIndicador(indicador) {
-    const base = new Date(`${dataFiltro}T00:00:00`);
+    const base = new Date(`${diaCalendarioFiltro}T00:00:00`);
     const dias = [];
     for (let i = 4; i >= 0; i--) {
       const data = new Date(base);
@@ -298,40 +339,72 @@ export default function AppIndicadoresArea() {
               <select value={setorFiltro} onChange={(e) => setSetorFiltro(e.target.value)} disabled={usuarioLogado.setor !== "Todos"} className="rounded-xl border bg-white px-4 py-2 disabled:bg-slate-100 disabled:text-slate-500">
                 {setoresDisponiveis.map((s) => <option key={s}>{s}</option>)}
               </select>
-              <span className="text-sm font-medium">Ano:</span>
-              <select value={anoFiltro} onChange={(e) => setAnoFiltro(Number(e.target.value))} className="rounded-xl border bg-white px-4 py-2">
-                <option value={2026}>2026</option>
-                <option value={2027}>2027</option>
-                <option value={2028}>2028</option>
+              <span className="text-sm font-medium">Visão:</span>
+              <select value={tipoVisao} onChange={(e) => setTipoVisao(e.target.value)} className="rounded-xl border bg-white px-4 py-2">
+                <option value="diario">Diária</option>
+                <option value="semanal">Semanal</option>
+                <option value="mensal">Mensal</option>
               </select>
 
-              <span className="text-sm font-medium">Mês:</span>
-              <select value={mesFiltro} onChange={(e) => setMesFiltro(Number(e.target.value))} className="rounded-xl border bg-white px-4 py-2">
-                <option value={1}>Janeiro</option>
-                <option value={2}>Fevereiro</option>
-                <option value={3}>Março</option>
-                <option value={4}>Abril</option>
-                <option value={5}>Maio</option>
-                <option value={6}>Junho</option>
-                <option value={7}>Julho</option>
-                <option value={8}>Agosto</option>
-                <option value={9}>Setembro</option>
-                <option value={10}>Outubro</option>
-                <option value={11}>Novembro</option>
-                <option value={12}>Dezembro</option>
-              </select>
+              {tipoVisao === "diario" && (
+                <div className="flex items-center gap-2 rounded-2xl border bg-white px-4 py-2 shadow-sm">
+                  <span className="text-sm font-medium text-slate-600">Dia:</span>
+                  <input
+                    type="date"
+                    value={diaCalendarioFiltro}
+                    onChange={(e) => {
+                      setDiaCalendarioFiltro(e.target.value);
+                      setDataFiltro(e.target.value);
+                      const data = new Date(`${e.target.value}T00:00:00`);
+                      setAnoFiltro(data.getFullYear());
+                      setMesFiltro(data.getMonth() + 1);
+                    }}
+                    className="rounded-xl border bg-slate-50 px-3 py-2"
+                  />
+                </div>
+              )}
 
-              <span className="text-sm font-medium">Período:</span>
-              <select value={semanaFiltro} onChange={(e) => setSemanaFiltro(e.target.value)} className="rounded-xl border bg-white px-4 py-2">
-                <option value="mes">Mês completo</option>
-                <option value="1">1ª semana</option>
-                <option value="2">2ª semana</option>
-                <option value="3">3ª semana</option>
-                <option value="4">4ª semana</option>
-                <option value="5">5ª semana</option>
-              </select>
+              {(tipoVisao === "semanal" || tipoVisao === "mensal") && (
+                <>
+                  <span className="text-sm font-medium">Ano:</span>
+                  <select value={anoFiltro} onChange={(e) => setAnoFiltro(Number(e.target.value))} className="rounded-xl border bg-white px-4 py-2">
+                    <option value={2026}>2026</option>
+                    <option value={2027}>2027</option>
+                    <option value={2028}>2028</option>
+                  </select>
 
-              <Badge className="bg-slate-100 text-slate-700 border-slate-300">Consolidado: {periodoSelecionado.label}</Badge>
+                  <span className="text-sm font-medium">Mês:</span>
+                  <select value={mesFiltro} onChange={(e) => setMesFiltro(Number(e.target.value))} className="rounded-xl border bg-white px-4 py-2">
+                    <option value={1}>Janeiro</option>
+                    <option value={2}>Fevereiro</option>
+                    <option value={3}>Março</option>
+                    <option value={4}>Abril</option>
+                    <option value={5}>Maio</option>
+                    <option value={6}>Junho</option>
+                    <option value={7}>Julho</option>
+                    <option value={8}>Agosto</option>
+                    <option value={9}>Setembro</option>
+                    <option value={10}>Outubro</option>
+                    <option value={11}>Novembro</option>
+                    <option value={12}>Dezembro</option>
+                  </select>
+                </>
+              )}
+
+              {tipoVisao === "semanal" && (
+                <>
+                  <span className="text-sm font-medium">Semana:</span>
+                  <select value={semanaFiltro} onChange={(e) => setSemanaFiltro(e.target.value)} className="rounded-xl border bg-white px-4 py-2">
+                    <option value="1">1ª semana</option>
+                    <option value="2">2ª semana</option>
+                    <option value="3">3ª semana</option>
+                    <option value="4">4ª semana</option>
+                    <option value="5">5ª semana</option>
+                  </select>
+                </>
+              )}
+
+              <Badge className="bg-slate-100 text-slate-700 border-slate-300">{periodoSelecionado.label}</Badge>
             </div>
 
             <div className="grid gap-4 md:grid-cols-5">
