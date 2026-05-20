@@ -10,12 +10,12 @@ import {
 } from "recharts";
 
 const usuarios = [
-  { nome: "Líder Operações Químicas", senha: "123", setor: "Operações Químicas" },
-  { nome: "Líder Operações Secos", senha: "123", setor: "Operações Secos" },
-  { nome: "Líder Estoque", senha: "123", setor: "Estoque" },
-  { nome: "Líder Recebimento Geral", senha: "123", setor: "Operações Recebimento Geral" },
-  { nome: "Líder Almoxarifado U&C", senha: "123", setor: "Almoxarifado (Uso & Consumo)" },
-  { nome: "Diretoria", senha: "admin", setor: "Todos" },
+  { nome: "Almoxarifado U&C", senha: "UC1", setor: "Almoxarifado (Uso & Consumo)" },
+  { nome: "Recebimento e Armazenagem", senha: "RA2", setor: "Operações Recebimento Geral" },
+  { nome: "Estoque e Inventário", senha: "EI3", setor: "Estoque" },
+  { nome: "Operação Secos", senha: "OS4", setor: "Operações Secos" },
+  { nome: "Operações Química", senha: "OQ5", setor: "Operações Químicas" },
+  { nome: "Gestão", senha: "GE6", setor: "Todos" },
 ];
 
 const indicadoresBase = [
@@ -295,9 +295,13 @@ export default function AppIndicadoresArea() {
             <button onClick={entrar} className="w-full rounded-xl bg-slate-900 px-5 py-3 font-bold text-white">Entrar</button>
           </div>
           <div className="mt-6 rounded-2xl bg-slate-100 p-4 text-sm text-slate-600">
-            <p className="font-bold">Acesso de teste:</p>
-            <p>Líderes: senha 123</p>
-            <p>Diretoria: senha admin</p>
+            <p className="font-bold">Usuários habilitados:</p>
+            <p>Almoxarifado U&C</p>
+            <p>Recebimento e Armazenagem</p>
+            <p>Estoque e Inventário</p>
+            <p>Operação Secos</p>
+            <p>Operações Química</p>
+            <p>Gestão</p>
           </div>
         </div>
       </div>
