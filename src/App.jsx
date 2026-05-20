@@ -31,57 +31,7 @@ const indicadoresBase = [
   { id: 10, setor: "Almoxarifado (Uso & Consumo)", indicador: "Ruptura de Produto Acabado causada pelo Almoxarifado U&C", meta: 2, unidade: "%", regraMeta: "menor", tipoCalculo: "percentualDireto", r1Nome: "Percentual de ruptura do dia", r2Nome: "Não aplicável", descricao: "Resultado = R1 informado em porcentagem" },
 ];
 
-const registrosIniciais = [
-  // Base teste — 01/05/2026
-  { id: 1, data: "2026-05-01", indicadorId: 1, turno: "Turno 1", r1: 700, r2: 30000 },
-  { id: 2, data: "2026-05-01", indicadorId: 1, turno: "Turno 2", r1: 650, r2: 28000 },
-  { id: 3, data: "2026-05-01", indicadorId: 2, turno: "Turno 1", r1: 2500, r2: 2480 },
-  { id: 4, data: "2026-05-01", indicadorId: 2, turno: "Turno 2", r1: 2600, r2: 2550 },
-
-  // Base teste — 06/05/2026
-  { id: 5, data: "2026-05-06", indicadorId: 1, turno: "Turno 1", r1: 900, r2: 34000 },
-  { id: 6, data: "2026-05-06", indicadorId: 1, turno: "Turno 2", r1: 780, r2: 32000 },
-  { id: 7, data: "2026-05-06", indicadorId: 2, turno: "Turno 1", r1: 3100, r2: 3000 },
-  { id: 8, data: "2026-05-06", indicadorId: 2, turno: "Turno 2", r1: 3050, r2: 3000 },
-
-  // Base teste — 13/05/2026
-  { id: 9, data: "2026-05-13", indicadorId: 1, turno: "Turno 1", r1: 1250, r2: 48000 },
-  { id: 10, data: "2026-05-13", indicadorId: 1, turno: "Turno 2", r1: 980, r2: 47000 },
-  { id: 11, data: "2026-05-13", indicadorId: 2, turno: "Turno 1", r1: 5020, r2: 5000 },
-  { id: 12, data: "2026-05-13", indicadorId: 2, turno: "Turno 2", r1: 2990, r2: 3000 },
-
-  // Base teste — Operações Secos
-  { id: 13, data: "2026-05-01", indicadorId: 3, turno: "Turno 1", r1: 240, r2: 30000 },
-  { id: 14, data: "2026-05-01", indicadorId: 3, turno: "Turno 2", r1: 260, r2: 32000 },
-  { id: 15, data: "2026-05-06", indicadorId: 3, turno: "Turno 1", r1: 340, r2: 62000 },
-  { id: 16, data: "2026-05-06", indicadorId: 3, turno: "Turno 2", r1: 410, r2: 61500 },
-  { id: 17, data: "2026-05-13", indicadorId: 4, turno: "Turno 1", r1: 2, r2: 160 },
-  { id: 18, data: "2026-05-13", indicadorId: 4, turno: "Turno 2", r1: 4, r2: 170 },
-
-  // Base teste — Estoque
-  { id: 19, data: "2026-05-01", indicadorId: 5, turno: "Turno 1", r1: 98, r2: 100 },
-  { id: 20, data: "2026-05-01", indicadorId: 5, turno: "Turno 2", r1: 99, r2: 100 },
-  { id: 21, data: "2026-05-06", indicadorId: 5, turno: "Turno 1", r1: 156, r2: 158 },
-  { id: 22, data: "2026-05-06", indicadorId: 5, turno: "Turno 2", r1: 147, r2: 150 },
-  { id: 23, data: "2026-05-13", indicadorId: 6, turno: "Turno 1", r1: 1.4, r2: 0 },
-  { id: 24, data: "2026-05-13", indicadorId: 6, turno: "Turno 2", r1: 1.8, r2: 0 },
-
-  // Base teste — Recebimento Geral
-  { id: 25, data: "2026-05-01", indicadorId: 7, turno: "Turno 1", r1: 120, r2: 25000 },
-  { id: 26, data: "2026-05-01", indicadorId: 7, turno: "Turno 2", r1: 180, r2: 30000 },
-  { id: 27, data: "2026-05-06", indicadorId: 8, turno: "Turno 1", r1: 240, r2: 4 },
-  { id: 28, data: "2026-05-06", indicadorId: 8, turno: "Turno 2", r1: 300, r2: 5 },
-  { id: 29, data: "2026-05-13", indicadorId: 7, turno: "Turno 1", r1: 180, r2: 42000 },
-  { id: 30, data: "2026-05-13", indicadorId: 7, turno: "Turno 2", r1: 260, r2: 51500 },
-
-  // Base teste — Almoxarifado U&C
-  { id: 31, data: "2026-05-01", indicadorId: 9, turno: "Turno 1", r1: 97, r2: 99 },
-  { id: 32, data: "2026-05-01", indicadorId: 9, turno: "Turno 2", r1: 111, r2: 112 },
-  { id: 33, data: "2026-05-06", indicadorId: 10, turno: "Turno 1", r1: 1.2, r2: 0 },
-  { id: 34, data: "2026-05-06", indicadorId: 10, turno: "Turno 2", r1: 1.6, r2: 0 },
-  { id: 35, data: "2026-05-13", indicadorId: 9, turno: "Turno 1", r1: 120, r2: 122 },
-  { id: 36, data: "2026-05-13", indicadorId: 9, turno: "Turno 2", r1: 118, r2: 120 },
-];
+const registrosIniciais = [];
 
 function calcularResultado(registros, indicador) {
   if (indicador.tipoCalculo === "percentualDireto") {
